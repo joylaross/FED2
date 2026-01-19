@@ -1,0 +1,2000 @@
+/**************/
+/* CSS REMEDY */
+/**************/
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "NespressoLucas";
+	src: url("../fonts/NespressoLucas-Medium.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*********************/
+/* CUSTOM PROPERTIES */
+/*********************/
+:root {
+	--color-text: #111;
+	--color-background: #eee;
+	--color-white: #fff;
+	--color-black: #000;
+
+	--color-surface: #fff;
+	--color-surface-muted: #fafafa;
+	--color-section-tint: #f3eee8;
+	--color-section-tint-2: #f9f4eb;
+
+	--color-accent: #8b6b3f;
+	--color-accent-link: #8c6b3f;
+	--color-accent-2: #3f7f5f;
+
+	--color-muted-text: #666;
+
+	--overlay-scrim: rgba(0, 0, 0, 0.35);
+	--overlay-video: rgba(0, 0, 0, 0.45);
+
+	--border-color-soft: rgba(0, 0, 0, 0.08);
+	--border-color-soft-2: rgba(0, 0, 0, 0.12);
+	--border-color-medium: rgba(0, 0, 0, 0.18);
+	--border-color-strong: rgba(0, 0, 0, 0.25);
+
+	--shadow-header: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.08);
+	--shadow-card: 0 0 0 0.0625rem rgba(0, 0, 0, 0.1);
+
+	--duration-fast: 200ms;
+	--easing-standard: ease;
+
+	--radius-xs: 0.3rem;
+	--radius-s: 0.5rem;
+	--radius-m: 0.6rem;
+	--radius-l: 1rem;
+	--radius-xl: 1.5rem;
+	--radius-pill: 999rem;
+
+	--font-main: "NespressoLucas", sans-serif;
+	--font-size-h1: 2rem;
+	--font-size-h2: 2rem;
+	--font-size-h3: 1rem;
+	--font-size-p: 1rem;
+	--font-size-small: 0.85rem;
+
+	--base-font-size: 100%;
+}
+
+html {
+	font-size: var(--base-font-size);
+}
+
+:root[data-font="sm"] {
+	--base-font-size: 90%;
+}
+
+:root[data-font="md"] {
+	--base-font-size: 100%;
+}
+
+:root[data-font="lg"] {
+	--base-font-size: 115%;
+}
+
+:root[data-theme="dark"] {
+	--color-text: #eee;
+	--color-background: #111;
+
+	--color-surface: #161616;
+	--color-surface-muted: #1d1d1d;
+
+	--color-section-tint: #1a1a1a;
+	--color-section-tint-2: #141414;
+
+	--color-muted-text: #b6b6b6;
+
+	--border-color-soft: rgba(255, 255, 255, 0.12);
+	--border-color-soft-2: rgba(255, 255, 255, 0.16);
+	--border-color-medium: rgba(255, 255, 255, 0.22);
+	--border-color-strong: rgba(255, 255, 255, 0.32);
+
+	--shadow-header: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.45);
+	--shadow-card: 0 0 0 0.0625rem rgba(255, 255, 255, 0.08);
+
+	--overlay-scrim: rgba(0, 0, 0, 0.55);
+	--overlay-video: rgba(0, 0, 0, 0.6);
+}
+
+/****************/
+/* BASE STYLING */
+/****************/
+body {
+	padding: 0;
+	margin: 0;
+
+	overflow-x: hidden;
+
+	font-family: var(--font-main);
+
+	background: var(--color-surface);
+	color: var(--color-text);
+
+	display: flex;
+	flex-direction: column;
+	min-block-size: 100svh;
+}
+
+/***********/
+/* Header */
+/***********/
+header {
+	top: 0;
+	z-index: 10;
+
+	background: var(--color-surface);
+	box-shadow: var(--shadow-header);
+
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	gap: 1rem;
+
+	padding: 1rem 1.25rem;
+}
+
+header > a[aria-label="Nespresso home"] {
+	justify-self: start;
+	display: inline-flex;
+	align-items: center;
+
+	text-decoration: none;
+	color: var(--color-text);
+}
+
+header > a[aria-label="Nespresso home"] img {
+	inline-size: clamp(7.5rem, 18vw, 10.5rem);
+	block-size: auto;
+	display: block;
+}
+
+header > button[aria-label] {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--color-text);
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.25rem;
+}
+
+header > button[aria-label] svg {
+	inline-size: 2rem;
+	block-size: 2rem;
+}
+
+header > button[aria-label] svg:nth-of-type(2) {
+	display: none;
+}
+
+header > button[aria-label]::after {
+	content: "Menu";
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+/********************/
+/* Snelkoppelingen  */
+/********************/
+nav[aria-label="Snelkoppelingen"] ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-end;
+}
+
+nav[aria-label="Snelkoppelingen"] a {
+	display: inline-flex;
+	align-items: center;
+
+	color: var(--color-text);
+	text-decoration: none;
+}
+
+nav[aria-label="Snelkoppelingen"] svg {
+	inline-size: 2rem;
+	block-size: 2rem;
+}
+
+nav[aria-label="Snelkoppelingen"] button[data-theme-toggle],
+nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] {
+	display: none;
+}
+
+nav[aria-label="Snelkoppelingen"] button[data-theme-toggle] {
+	align-items: center;
+	justify-content: center;
+
+	background: transparent;
+	border: 0.1rem solid var(--border-color-strong);
+	border-radius: var(--radius-pill);
+	padding: 0.35rem 0.55rem;
+
+	color: var(--color-text);
+	cursor: pointer;
+}
+
+nav[aria-label="Snelkoppelingen"] button[data-theme-toggle]:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] {
+	margin: 0;
+	padding: 0.2rem;
+
+	border: 0.1rem solid var(--border-color-strong);
+	border-radius: var(--radius-pill);
+
+	gap: 0.2rem;
+	align-items: center;
+
+	background: transparent;
+}
+
+nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] legend {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] button {
+	border: 0;
+	background: transparent;
+	color: var(--color-text);
+	cursor: pointer;
+
+	padding: 0.35rem 0.55rem;
+	border-radius: var(--radius-pill);
+
+	font: inherit;
+	line-height: 1;
+}
+
+nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] button[aria-pressed="true"] {
+	background: var(--color-section-tint);
+}
+
+nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] button:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+nav[aria-label="Snelkoppelingen"] a[data-cart-link] {
+	position: relative;
+}
+
+nav[aria-label="Snelkoppelingen"] span[data-cart-count] {
+	position: absolute;
+	inset-block-start: -0.35rem;
+	inset-inline-end: -0.35rem;
+
+	min-inline-size: 1.25rem;
+	block-size: 1.25rem;
+	padding-inline: 0.25rem;
+
+	display: grid;
+	place-items: center;
+
+	border-radius: var(--radius-pill);
+	background: var(--color-accent);
+	color: var(--color-white);
+
+	font-size: 0.75rem;
+	font-weight: 700;
+	line-height: 1;
+
+	transform: scale(0);
+	transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+html[data-cart-state="has-items"] span[data-cart-count] {
+	transform: scale(1);
+}
+
+/***********************/
+/* Mobile menu overlay */
+/***********************/
+nav[aria-label="Hoofdmenu"] {
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	pointer-events: none;
+}
+
+nav[aria-label="Hoofdmenu"]::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+
+	background: var(--overlay-scrim);
+	opacity: 0;
+
+	transition: opacity var(--duration-fast) var(--easing-standard);
+}
+
+nav[aria-label="Hoofdmenu"] > ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	background: var(--color-surface);
+	inline-size: min(86vw, 28rem);
+	block-size: 100svh;
+
+	transform: translateX(-100%);
+	transition: transform var(--duration-fast) var(--easing-standard);
+
+	padding-block-start: 5rem;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+body[data-menu="open"] nav[aria-label="Hoofdmenu"] {
+	pointer-events: auto;
+}
+
+body[data-menu="open"] nav[aria-label="Hoofdmenu"]::before {
+	opacity: 1;
+}
+
+body[data-menu="open"] nav[aria-label="Hoofdmenu"] > ul {
+	transform: translateX(0);
+}
+
+body[data-menu="open"] header > button[aria-label]::after {
+	content: "Sluit";
+}
+
+body[data-menu="open"] header > button[aria-label] svg:nth-of-type(1) {
+	display: none;
+}
+
+body[data-menu="open"] header > button[aria-label] svg:nth-of-type(2) {
+	display: inline-block;
+}
+
+body[data-menu="open"] header > button[aria-label] {
+	position: fixed;
+	top: 0.9rem;
+	left: 1.25rem;
+	z-index: 40;
+}
+
+nav[aria-label="Hoofdmenu"] li {
+	border-bottom: 0.1rem solid var(--border-color-soft);
+}
+
+nav[aria-label="Hoofdmenu"] a {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	column-gap: 1.25rem;
+
+	padding: 1.2rem 1.5rem;
+
+	text-decoration: none;
+	color: var(--color-text);
+	font-weight: 600;
+	font-size: 1.3rem;
+}
+
+nav[aria-label="Hoofdmenu"] a svg {
+	inline-size: 2.05rem;
+	block-size: 2.05rem;
+}
+
+nav[aria-label="Hoofdmenu"] a::after {
+	content: "›";
+	opacity: 0.7;
+}
+
+body[data-scroll="locked"] {
+	overflow: hidden;
+}
+
+@media (min-width: 64em) {
+	header {
+		box-shadow: none;
+
+		padding-inline: 0;
+		padding-block-start: 1.25rem;
+		padding-block-end: 0;
+
+		gap: 1.25rem;
+	}
+
+	header > button[aria-label] {
+		display: none;
+	}
+
+	header > a[aria-label="Nespresso home"],
+	header > nav[aria-label="Snelkoppelingen"] {
+		padding-inline: 3rem;
+	}
+
+	header > a[aria-label="Nespresso home"] {
+		justify-self: start;
+	}
+
+	header > a[aria-label="Nespresso home"] img {
+		inline-size: 11.5rem;
+	}
+
+	nav[aria-label="Snelkoppelingen"] button[data-theme-toggle],
+	nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] {
+		display: inline-flex;
+	}
+
+	nav[aria-label="Snelkoppelingen"] a {
+		border: 0.1rem solid var(--border-color-strong);
+		border-radius: var(--radius-pill);
+		padding: 0.6rem 1rem;
+		gap: 0.6rem;
+
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	nav[aria-label="Snelkoppelingen"] a::after {
+		content: attr(aria-label);
+	}
+
+	nav[aria-label="Snelkoppelingen"] svg {
+		inline-size: 1.4rem;
+		block-size: 1.4rem;
+	}
+
+	nav[aria-label="Hoofdmenu"] {
+		position: relative;
+		pointer-events: auto;
+
+		inline-size: 100vw;
+		margin-inline: calc(50% - 50vw);
+
+		background: var(--color-section-tint);
+
+		grid-column: 1 / -1;
+	}
+
+	nav[aria-label="Hoofdmenu"]::before {
+		content: none;
+	}
+
+	nav[aria-label="Hoofdmenu"] > ul {
+		background: transparent;
+		transform: none;
+		transition: none;
+
+		inline-size: min(90rem, 100%);
+		margin-inline: auto;
+
+		block-size: auto;
+		overflow: visible;
+
+		padding: 0;
+
+		display: grid;
+		grid-template-columns: repeat(9, 1fr);
+
+		min-block-size: auto;
+		padding-block: 0.35rem;
+		align-items: center;
+	}
+
+	nav[aria-label="Hoofdmenu"] > ul > li {
+		border-bottom: none;
+		border-left: 0.1rem solid var(--border-color-medium);
+
+		display: flex;
+		align-items: stretch;
+	}
+
+	nav[aria-label="Hoofdmenu"] > ul > li:first-child {
+		border-left: none;
+	}
+
+	nav[aria-label="Hoofdmenu"] a {
+		inline-size: 100%;
+		block-size: 100%;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		gap: 0.2rem;
+		padding-block: 0.2rem;
+
+		text-align: center;
+		text-wrap: balance;
+
+		font-size: 0.85rem;
+	}
+
+	nav[aria-label="Hoofdmenu"] a::after {
+		content: "";
+	}
+
+	nav[aria-label="Hoofdmenu"] a svg {
+		inline-size: 1.45rem;
+		block-size: 1.45rem;
+	}
+}
+
+/*************************/
+/* Home page afbeelding */
+/*************************/
+img {
+	display: block;
+	max-inline-size: 100%;
+}
+
+main {
+	margin: 0;
+}
+
+main > section:first-of-type {
+	position: relative;
+	inline-size: 100vw;
+	margin-inline: calc(50% - 50vw);
+
+	min-block-size: 90vh;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+	color: var(--color-white);
+
+	overflow: hidden;
+}
+
+main > section:first-of-type > img {
+	position: absolute;
+	inset: 0;
+
+	inline-size: 100%;
+	block-size: 100%;
+
+	object-fit: cover;
+	z-index: -1;
+}
+
+main > section:first-of-type h1,
+main > section:first-of-type p,
+main > section:first-of-type button {
+	opacity: 0;
+	transform: translateY(1rem);
+	transition:
+		opacity 1200ms ease,
+		transform 1200ms ease;
+}
+
+main > section:first-of-type.is-visible h1,
+main > section:first-of-type.is-visible p,
+main > section:first-of-type.is-visible button {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+main > section:first-of-type h1 {
+	font-size: var(--font-size-h1);
+	margin-block: 0 0.5rem;
+}
+
+main > section:first-of-type p {
+	font-size: var(--font-size-p);
+	margin-block: 0 1.5rem;
+}
+
+main > section:first-of-type button {
+	padding: 0.75em 1.5em;
+	border: none;
+	border-radius: 5em;
+
+	font-size: var(--font-size-p);
+	cursor: pointer;
+}
+
+main > section:first-of-type button:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	main > section:first-of-type h1,
+	main > section:first-of-type p,
+	main > section:first-of-type button {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/************************************/
+/* Koffie, machines en accessoires 2 */
+/************************************/
+section:nth-of-type(2) {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	padding: 1.5rem;
+}
+
+section:nth-of-type(2) > article {
+	position: relative;
+	flex: 1;
+
+	text-align: center;
+}
+
+section:nth-of-type(2) > article img {
+	inline-size: 100%;
+	block-size: 20em;
+
+	border-radius: 1em;
+	display: block;
+	object-fit: cover;
+}
+
+section:nth-of-type(2) > article p {
+	position: absolute;
+	inset-block-start: 1.5rem;
+	inset-inline-start: 1.5rem;
+
+	color: var(--color-white);
+	font-size: var(--font-size-p);
+}
+
+@media (min-width: 48em) {
+	section:nth-of-type(2) {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	section:nth-of-type(2) > article {
+		max-inline-size: 30%;
+	}
+}
+
+/*****************************************/
+/* Andere promoties en nieuwe producten 3 */
+/*****************************************/
+section:nth-of-type(3) {
+	position: relative;
+	padding-inline-start: 1rem;
+}
+
+section:nth-of-type(3) h2 {
+	text-align: left;
+	margin-block-end: 0.5em;
+	font-size: 1.5rem;
+}
+
+section:nth-of-type(3) p {
+	margin: 0 0 1em 0;
+}
+
+section:nth-of-type(3) ul {
+	list-style: none;
+	margin: 0;
+	padding: 1.5rem 0;
+
+	display: flex;
+	gap: 1.5rem;
+
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+}
+
+section:nth-of-type(3) ul li {
+	position: relative;
+	flex: 0 0 80%;
+
+	scroll-snap-align: start;
+	border-radius: 1em;
+	overflow: hidden;
+}
+
+section:nth-of-type(3) ul li img {
+	inline-size: 100%;
+	block-size: 31.25rem;
+
+	object-fit: cover;
+	display: block;
+
+	border-radius: 1em;
+}
+
+section:nth-of-type(3) ul li p {
+	position: absolute;
+	inset-block-start: 1.5rem;
+	inset-inline-start: 1.5rem;
+
+	color: var(--color-white);
+	font-size: var(--font-size-small);
+	margin: 0;
+}
+
+section:nth-of-type(3) ul li h3 {
+	position: absolute;
+	inset-block-start: calc(1.5rem * 2);
+	inset-inline: 1.5rem;
+
+	color: var(--color-white);
+	font-size: var(--font-size-h3);
+	margin: 0;
+}
+
+section:nth-of-type(3) ul li button {
+	position: absolute;
+	inset-block-end: 0.5rem;
+	inset-inline-start: 0.5rem;
+
+	padding: 0.5em 1.5em;
+
+	font-size: var(--font-size-small);
+	border: none;
+
+	background-color: var(--color-white);
+	color: var(--color-black);
+
+	border-radius: 1em;
+	cursor: pointer;
+}
+
+section:nth-of-type(3) ul li button:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+section:nth-of-type(3) > button {
+	display: none;
+}
+
+@media (min-width: 64em) {
+	section:nth-of-type(3) {
+		padding-inline-start: 6rem;
+	}
+
+	section:nth-of-type(3) ul li {
+		flex: 0 0 23%;
+	}
+
+	section:nth-of-type(3) .carousel-prev,
+	section:nth-of-type(3) .carousel-next {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		position: absolute;
+		inset-block-start: 2.5rem;
+
+		inline-size: 2rem;
+		aspect-ratio: 1 / 1;
+
+		background-color: var(--color-black);
+		color: var(--color-white);
+
+		border-radius: 50%;
+		border: none;
+
+		font-size: 1.2rem;
+		cursor: pointer;
+		z-index: 10;
+	}
+
+	section:nth-of-type(3) .carousel-prev:focus-visible,
+	section:nth-of-type(3) .carousel-next:focus-visible {
+		outline: 0.15rem solid var(--color-accent);
+		outline-offset: 0.15rem;
+	}
+
+	section:nth-of-type(3) .carousel-prev {
+		inset-inline-end: 4.5rem;
+	}
+
+	section:nth-of-type(3) .carousel-next {
+		inset-inline-end: 1.5rem;
+	}
+}
+
+
+/***************************************/
+/* Feestelijke collectie afbeeldingen 4 */
+/***************************************/
+section:nth-of-type(4) {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+
+	padding-inline: 1rem;
+}
+
+section:nth-of-type(4) h2 {
+	inline-size: 100%;
+}
+
+section:nth-of-type(4) img {
+	display: block;
+	inline-size: 100%;
+	block-size: auto;
+
+	border-radius: 1em;
+}
+
+section:nth-of-type(4) > img:nth-of-type(2),
+section:nth-of-type(4) > img:nth-of-type(3) {
+	inline-size: calc(50% - 0.75em);
+}
+
+@media (min-width: 64em) {
+	section:nth-of-type(4) {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		grid-template-rows: auto 25em 25em;
+		gap: 1.5em;
+
+		padding-inline: 6rem;
+		padding-block: 3rem;
+
+		background-color: var(--color-section-tint);
+	}
+
+	section:nth-of-type(4) h2 {
+		grid-column: 1 / -1;
+		grid-row: 1;
+
+		text-align: center;
+	}
+
+	section:nth-of-type(4) > img:first-of-type {
+		grid-column: 1;
+		grid-row: 2 / 4;
+		block-size: 100%;
+	}
+
+	section:nth-of-type(4) > img:nth-of-type(2) {
+		grid-column: 2;
+		grid-row: 2;
+
+		inline-size: 100%;
+		block-size: 100%;
+	}
+
+	section:nth-of-type(4) > img:nth-of-type(3) {
+		grid-column: 2;
+		grid-row: 3;
+
+		inline-size: 100%;
+		block-size: 100%;
+	}
+}
+
+/***************************/
+/* Bestsellers carrousel 5 */
+/***************************/
+section:nth-of-type(5) {
+	position: relative;
+	padding-inline-start: 1rem;
+}
+
+section:nth-of-type(5) h2 {
+	text-align: left;
+	margin-block-end: 1em;
+	font-size: 1.5rem;
+}
+
+section:nth-of-type(5) > button {
+	padding: 0.5em 1.2em;
+
+	font-size: 0.9rem;
+	border-radius: 1em;
+	border: 0.0625rem solid var(--color-black);
+	background-color: var(--color-white);
+
+	cursor: pointer;
+	margin-inline-end: 0.5em;
+}
+
+section:nth-of-type(5) > button:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+section:nth-of-type(5) ul {
+	list-style: none;
+	margin: 0;
+	padding: 1em 0;
+
+	display: flex;
+	gap: 1em;
+
+	overflow-x: auto;
+	scroll-behavior: smooth;
+}
+
+section:nth-of-type(5) ul li {
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	gap: 0.4em;
+
+	min-inline-size: 16em;
+	padding: 1em;
+
+	background: var(--color-white);
+	border-radius: 1.5em;
+	box-shadow: var(--shadow-card);
+}
+
+section:nth-of-type(5) ul li img {
+	inline-size: 100%;
+	aspect-ratio: 1 / 1;
+
+	object-fit: contain;
+
+	background: var(--color-surface-muted);
+	border-radius: 1em;
+
+	margin-block-end: 0.5em;
+}
+
+section:nth-of-type(5) ul li p:first-of-type {
+	align-self: flex-start;
+
+	background: var(--color-accent);
+	color: var(--color-white);
+
+	font-size: 0.7rem;
+	padding: 0.25em 0.6em;
+	border-radius: 0.5em;
+
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+section:nth-of-type(5) ul li h3 {
+	margin: 0.5em 0 0;
+
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+section:nth-of-type(5) ul li p:nth-of-type(2) {
+	margin: 0;
+
+	font-size: 0.9rem;
+	color: var(--color-muted-text);
+}
+
+section:nth-of-type(5) ul li p:nth-of-type(3) {
+	margin-top: auto;
+
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+section:nth-of-type(5) ul li button {
+	position: absolute;
+	inset-inline-end: 1em;
+	inset-block-end: 1em;
+
+	inline-size: 2em;
+	block-size: 2em;
+
+	border-radius: 0.5em;
+	border: 0.0625rem solid var(--color-black);
+
+	background: var(--color-white);
+	color: var(--color-black);
+
+	font-size: 1.4rem;
+	cursor: pointer;
+}
+
+section:nth-of-type(5) ul li button:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+section:nth-of-type(5) .carousel-prev,
+section:nth-of-type(5) .carousel-next {
+	display: none;
+}
+
+@media (min-width: 64em) {
+	section:nth-of-type(5) {
+		padding-inline-start: 6rem;
+	}
+
+	section:nth-of-type(5) ul li {
+		min-inline-size: 20em;
+	}
+
+	section:nth-of-type(5) .carousel-prev,
+	section:nth-of-type(5) .carousel-next {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		position: absolute;
+		inset-block-start: 1.5rem;
+
+		inline-size: 1.8rem;
+		aspect-ratio: 1 / 1;
+
+		background: var(--color-black);
+		color: var(--color-white);
+
+		border-radius: 50%;
+		border: none;
+
+		font-size: 1rem;
+		cursor: pointer;
+		z-index: 10;
+	}
+
+	section:nth-of-type(5) .carousel-prev:focus-visible,
+	section:nth-of-type(5) .carousel-next:focus-visible {
+		outline: 0.15rem solid var(--color-accent);
+		outline-offset: 0.15rem;
+	}
+
+	section:nth-of-type(5) .carousel-prev {
+		inset-inline-end: 3.5rem;
+	}
+
+	section:nth-of-type(5) .carousel-next {
+		inset-inline-end: 1rem;
+	}
+}
+
+/*************************/
+/* Nespresso boutiques 6 */
+/*************************/
+section:nth-of-type(6) {
+	position: relative;
+
+	min-block-size: 100svh;
+	padding: 1em;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+	color: var(--color-white);
+
+	overflow: hidden;
+}
+
+section:nth-of-type(6) video {
+	position: absolute;
+	inset: 0;
+
+	inline-size: 100%;
+	block-size: 100%;
+
+	object-fit: cover;
+	z-index: -2;
+}
+
+section:nth-of-type(6)::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+
+	background: var(--overlay-video);
+	z-index: -1;
+}
+
+section:nth-of-type(6) p {
+	margin-block-end: 1em;
+
+	background: var(--color-accent);
+	padding: 0.4em 0.8em;
+
+	border-radius: 0.6em;
+	font-size: 0.8rem;
+
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+section:nth-of-type(6) h2 {
+	max-inline-size: 18em;
+	margin-block-end: 1.5em;
+
+	font-size: 2rem;
+	font-weight: 400;
+	line-height: 1.3;
+}
+
+section:nth-of-type(6) button {
+	padding: 0.8em 1.5em;
+
+	border-radius: 2em;
+	border: none;
+
+	background: var(--color-accent-2);
+	color: var(--color-white);
+
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+section:nth-of-type(6) button:focus-visible {
+	outline: 0.15rem solid var(--color-white);
+	outline-offset: 0.15rem;
+}
+
+@media (min-width: 64em) {
+	section:nth-of-type(6) {
+		min-block-size: 50vh;
+	}
+}
+
+/****************************/
+/* Langdurige verandering 7 */
+/****************************/
+section:nth-of-type(7) {
+	padding-inline-start: 1rem;
+}
+
+section:nth-of-type(7) ul {
+	list-style: none;
+	margin: 0;
+	padding: 1.5rem 0;
+
+	display: flex;
+	gap: 1.5rem;
+
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+}
+
+section:nth-of-type(7) ul li {
+	position: relative;
+	flex: 0 0 80%;
+
+	scroll-snap-align: start;
+	border-radius: 1em;
+	overflow: hidden;
+}
+
+section:nth-of-type(7) ul li img {
+	inline-size: 100%;
+	aspect-ratio: 16 / 25;
+
+	object-fit: cover;
+	display: block;
+
+	border-radius: 1em;
+}
+
+section:nth-of-type(7) ul li p {
+	position: absolute;
+	inset-block-start: 1.5rem;
+	inset-inline-start: 1.5rem;
+
+	margin: 0;
+	padding: 0.25rem 0.5rem;
+
+	color: var(--color-white);
+	border-radius: 0.3rem;
+	font-size: var(--font-size-small);
+}
+
+section:nth-of-type(7) ul li h3 {
+	position: absolute;
+	inset-block-start: calc(1.5rem * 3);
+	inset-inline: 1.5rem;
+
+	margin: 0;
+
+	color: var(--color-white);
+	font-size: var(--font-size-h3);
+	line-height: 1.1;
+}
+
+section:nth-of-type(7) ul li button {
+	position: absolute;
+	inset-block-end: 1.5rem;
+	inset-inline-start: 1.5rem;
+
+	padding: 0.5rem 1em;
+
+	font-size: var(--font-size-small);
+	border: none;
+	border-radius: 1em;
+
+	background: var(--color-black);
+	color: var(--color-white);
+
+	cursor: pointer;
+}
+
+section:nth-of-type(7) ul li button:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+@media (min-width: 64em) {
+	section:nth-of-type(7) ul {
+		justify-content: center;
+		overflow-x: visible;
+	}
+
+	section:nth-of-type(7) ul li {
+		flex: 0 0 23%;
+		scroll-snap-align: none;
+	}
+
+	section:nth-of-type(7) h2,
+	section:nth-of-type(7) p {
+		text-align: center;
+	}
+}
+
+/**********************************/
+/* Waar kunnen we je mee helpen 8 */
+/**********************************/
+section:nth-of-type(8) {
+	inline-size: 100vw;
+	margin-inline: calc(50% - 50vw);
+
+	padding: 3em 1em;
+
+	text-align: center;
+	background-color: var(--color-section-tint-2);
+}
+
+section:nth-of-type(8) h2 {
+	margin-block-end: 2em;
+	font-size: 1.6rem;
+}
+
+section:nth-of-type(8) ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	display: flex;
+	gap: 2em;
+
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+}
+
+section:nth-of-type(8) li {
+	flex: 0 0 85%;
+	max-inline-size: 22em;
+
+	margin-inline: auto;
+
+	scroll-snap-align: center;
+	text-align: center;
+}
+
+section:nth-of-type(8) li svg {
+	inline-size: 4.5em;
+	block-size: 4.5em;
+
+	margin-block-end: 1.5em;
+	fill: var(--color-accent);
+}
+
+section:nth-of-type(8) li h3 {
+	font-size: 1.1rem;
+	margin-block-end: 0.75em;
+}
+
+section:nth-of-type(8) li p {
+	margin-block-end: 1.2em;
+
+	font-size: 0.95rem;
+	line-height: 1.5;
+	color: var(--color-muted-text);
+}
+
+section:nth-of-type(8) li a {
+	color: var(--color-accent);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+section:nth-of-type(8) li a:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+@media (min-width: 64em) {
+	section:nth-of-type(8) ul {
+		overflow: visible;
+		scroll-snap-type: none;
+		justify-content: center;
+	}
+
+	section:nth-of-type(8) li {
+		flex: 0 0 30%;
+	}
+}
+
+/************************/
+/* Nespresso ervaring 9 */
+/************************/
+section:nth-of-type(9) {
+	position: relative;
+
+	display: grid;
+	gap: 1.5em;
+
+	padding: 2em 1em;
+}
+
+section:nth-of-type(9) img {
+	inline-size: 100%;
+	display: block;
+
+	position: relative;
+	z-index: 1;
+}
+
+section:nth-of-type(9) h2 {
+	font-size: 1.5rem;
+	letter-spacing: 0.05em;
+}
+
+section:nth-of-type(9) p {
+	max-inline-size: 35em;
+	line-height: 1.6;
+}
+
+section:nth-of-type(9) a {
+	inline-size: fit-content;
+
+	color: var(--color-accent-link);
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+section:nth-of-type(9) a:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+@media (min-width: 64em) {
+	section:nth-of-type(9) {
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+
+		gap: 4em;
+		padding: 4em;
+	}
+
+	section:nth-of-type(9) img {
+		grid-row: 1 / 5;
+	}
+
+	section:nth-of-type(9)::before {
+		content: "";
+		position: absolute;
+
+		inset-inline-start: 3em;
+		inset-block-start: 3em;
+
+		inline-size: 35%;
+		block-size: 70%;
+
+		background: var(--color-section-tint);
+		z-index: 0;
+	}
+}
+
+/****************/
+/* Doe de test 10 */
+/****************/
+section:nth-of-type(10) {
+	position: relative;
+
+	inline-size: 100%;
+	min-block-size: 60vh;
+	padding: 2rem;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+	color: var(--color-white);
+
+	overflow: hidden;
+}
+
+section:nth-of-type(10) > img {
+	position: absolute;
+	inset: 0;
+
+	inline-size: 100%;
+	block-size: 100%;
+
+	object-fit: cover;
+	z-index: -1;
+}
+
+section:nth-of-type(10) h2 {
+	font-size: var(--font-size-h2);
+	margin-block-end: 0.5rem;
+}
+
+section:nth-of-type(10) p {
+	max-inline-size: 37.5rem;
+	margin-block-end: 1.5rem;
+
+	font-size: var(--font-size-p);
+}
+
+section:nth-of-type(10) a {
+	display: inline-block;
+
+	padding: 0.75em 1.5em;
+
+	background-color: var(--color-black);
+	color: var(--color-white);
+
+	text-decoration: none;
+	border-radius: 1em;
+
+	font-size: var(--font-size-p);
+}
+
+section:nth-of-type(10) a:focus-visible {
+	outline: 0.15rem solid var(--color-white);
+	outline-offset: 0.15rem;
+}
+
+
+/****************/
+/* Footer basis */
+/****************/
+footer {
+	background: var(--color-surface);
+	color: var(--color-text);
+
+	display: flex;
+	flex-direction: column;
+
+	overflow-x: hidden;
+}
+
+footer > section {
+	position: static;
+	inset: auto;
+
+	inline-size: auto;
+	block-size: auto;
+
+	margin: 0;
+	padding: 0;
+
+	padding-inline: clamp(1.25rem, 4vw, 6rem);
+}
+
+footer ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	overflow: visible;
+	scroll-snap-type: none;
+	-webkit-overflow-scrolling: auto;
+}
+
+footer a {
+	color: inherit;
+	text-decoration: none;
+}
+
+footer a:hover,
+footer a:focus-visible {
+	text-decoration: underline;
+}
+
+footer h2 {
+	margin: 0 0 0.75rem;
+	font-size: 1.15rem;
+	font-weight: 600;
+}
+
+footer .visually-hidden {
+	position: absolute;
+
+	inline-size: 0.0625rem;
+	block-size: 0.0625rem;
+
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/************************************/
+/* 1) Footer navigatie (details)     */
+/************************************/
+footer section[aria-label="Footer navigatie"] {
+	padding-block: clamp(2.25rem, 4vw, 4rem);
+
+	display: grid;
+	gap: 1.25rem;
+}
+
+footer section[aria-label="Footer navigatie"] details {
+	border-top: 0.1rem solid var(--border-color-soft-2);
+}
+
+footer section[aria-label="Footer navigatie"] details:last-of-type {
+	border-bottom: 0.1rem solid var(--border-color-soft-2);
+}
+
+footer section[aria-label="Footer navigatie"] summary {
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1.1rem;
+	list-style: none;
+
+	min-block-size: 2.75rem;
+	padding-block: 0.65rem;
+
+	position: relative;
+	padding-inline-end: 2rem;
+
+	display: flex;
+	align-items: center;
+}
+
+footer section[aria-label="Footer navigatie"] summary::-webkit-details-marker {
+	display: none;
+}
+
+footer section[aria-label="Footer navigatie"] summary::after {
+	content: "▾";
+	position: absolute;
+
+	inset-inline-end: 0;
+	inset-block-start: 50%;
+
+	transform: translateY(-50%);
+	font-size: 1.2rem;
+
+	transition: transform var(--duration-fast) var(--easing-standard);
+	opacity: 0.8;
+}
+
+footer section[aria-label="Footer navigatie"] details[open] > summary::after {
+	transform: translateY(-50%) rotate(180deg);
+}
+
+footer section[aria-label="Footer navigatie"] nav ul {
+	margin-block: 0.9rem 1.25rem;
+
+	display: grid;
+	gap: 0.85rem;
+}
+
+footer section[aria-label="Footer navigatie"] nav a {
+	font-size: 1rem;
+	opacity: 0.85;
+}
+
+footer section[aria-label="Footer navigatie"] details:last-of-type a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+footer section[aria-label="Footer navigatie"] details:last-of-type svg {
+	inline-size: 1.25rem;
+	block-size: 1.25rem;
+
+	opacity: 0.7;
+	flex: 0 0 auto;
+}
+
+/************************************/
+/* 2) Apps en keurmerken             */
+/************************************/
+footer section[aria-label="Apps en keurmerken"] {
+	padding-block: clamp(2rem, 4vw, 3.25rem);
+
+	display: grid;
+	gap: 1.75rem;
+
+	justify-items: start;
+	text-align: start;
+}
+
+footer section[aria-label="Apps en keurmerken"] h2 {
+	margin: 0;
+	font-size: 1.05rem;
+	font-weight: 600;
+}
+
+footer section[aria-label="Apps en keurmerken"] ul {
+	display: inline-flex;
+	gap: 1.25rem;
+
+	align-items: center;
+	justify-content: flex-start;
+}
+
+footer section[aria-label="Apps en keurmerken"] ul a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	inline-size: 2.5rem;
+	block-size: 2.5rem;
+}
+
+footer section[aria-label="Apps en keurmerken"] ul svg {
+	inline-size: 1.6rem;
+	block-size: 1.6rem;
+	opacity: 0.9;
+}
+
+footer section[aria-label="Apps en keurmerken"] a[aria-label="Bekijk Thuiswinkel Waarborg"] {
+	justify-self: start;
+}
+
+footer section[aria-label="Apps en keurmerken"] img {
+	display: block;
+
+	inline-size: min(12rem, 70vw);
+	block-size: auto;
+}
+
+/************************************/
+/* 3) Taal en social (beige balk)    */
+/************************************/
+footer section[aria-label="Taal en social"] {
+	background: var(--color-section-tint);
+	border-top: 0.1rem solid var(--border-color-soft);
+
+	padding-block: 0.9rem;
+
+	display: grid;
+	align-items: center;
+
+	gap: 0;
+	overflow-x: hidden;
+}
+
+footer section[aria-label="Taal en social"] > * {
+	min-inline-size: 0;
+}
+
+footer section[aria-label="Taal en social"] h2 {
+	position: absolute;
+
+	inline-size: 0.0625rem;
+	block-size: 0.0625rem;
+
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+footer section[aria-label="Taal en social"] button {
+	justify-self: start;
+
+	border: none;
+	background: transparent;
+
+	cursor: pointer;
+	font-size: 1rem;
+
+	opacity: 0.9;
+	color: inherit;
+	padding: 0;
+}
+
+footer section[aria-label="Taal en social"] button:focus-visible {
+	outline: 0.15rem solid var(--color-accent);
+	outline-offset: 0.15rem;
+}
+
+footer section[aria-label="Taal en social"] p {
+	margin: 0;
+
+	font-weight: 600;
+	opacity: 0.9;
+}
+
+footer section[aria-label="Taal en social"] ul {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+
+	gap: 0.5rem;
+	overflow: visible;
+}
+
+footer section[aria-label="Taal en social"] ul a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	inline-size: 2rem;
+	block-size: 2rem;
+
+	border-radius: var(--radius-pill);
+}
+
+footer section[aria-label="Taal en social"] ul svg {
+	inline-size: 1.25rem;
+	block-size: 1.25rem;
+
+	opacity: 0.9;
+}
+
+footer section[aria-label="Taal en social"] a[aria-label^="Terug naar"] {
+	justify-self: start;
+
+	opacity: 0.9;
+
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+
+	max-inline-size: 100%;
+	overflow-wrap: anywhere;
+}
+
+footer section[aria-label="Taal en social"] a[aria-label^="Terug naar"]::after {
+	content: "↑";
+	opacity: 0.85;
+}
+
+/************************************/
+/* 4) Juridische informatie          */
+/************************************/
+footer section[aria-label="Juridische informatie"] {
+	background: var(--color-surface);
+	padding-block: 2.25rem 1.5rem;
+
+	display: grid;
+	justify-items: center;
+
+	text-align: center;
+	gap: 0.9rem;
+}
+
+footer section[aria-label="Juridische informatie"] nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	gap: 0.75rem;
+	font-size: 0.95rem;
+}
+
+footer section[aria-label="Juridische informatie"] nav li {
+	display: inline-flex;
+	align-items: center;
+}
+
+footer section[aria-label="Juridische informatie"] nav li + li::before {
+	content: "|";
+	opacity: 0.4;
+	margin-inline: 0.5rem;
+}
+
+footer section[aria-label="Juridische informatie"] p {
+	margin: 0;
+
+	opacity: 0.75;
+	font-size: 0.95rem;
+	text-align: center;
+}
+
+@media (min-width: 64em) {
+	footer section[aria-label="Footer navigatie"] {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: clamp(2rem, 4vw, 5rem);
+
+		padding-block: 3.25rem;
+		align-items: start;
+	}
+
+	footer section[aria-label="Footer navigatie"] details {
+		border: none;
+
+		display: grid;
+		align-content: start;
+		gap: 1.1rem;
+	}
+
+	footer section[aria-label="Footer navigatie"] summary {
+		font-size: 1.35rem;
+		font-weight: 500;
+
+		margin: 0;
+		text-align: center;
+
+		cursor: default;
+		pointer-events: none;
+
+		padding: 0;
+		min-block-size: auto;
+	}
+
+	footer section[aria-label="Footer navigatie"] summary::after {
+		content: "";
+	}
+
+	footer section[aria-label="Footer navigatie"] nav ul {
+		margin: 0;
+
+		display: grid;
+		gap: 0.9rem;
+
+		justify-items: start;
+		text-align: start;
+	}
+
+	footer section[aria-label="Footer navigatie"] nav a {
+		font-size: 1.05rem;
+	}
+
+	footer section[aria-label="Apps en keurmerken"] {
+		justify-content: center;
+		justify-items: stretch;
+		align-items: center;
+
+		grid-template-columns: max-content max-content;
+		grid-template-areas:
+			"appTitle appIcons"
+			"trustTitle trustLogo";
+
+		column-gap: 2.5rem;
+		row-gap: 2.25rem;
+	}
+
+	footer section[aria-label="Apps en keurmerken"] > h2:first-of-type {
+		grid-area: appTitle;
+
+		justify-self: end;
+		text-align: end;
+
+		font-weight: 500;
+		opacity: 0.75;
+	}
+
+	footer section[aria-label="Apps en keurmerken"] > ul {
+		grid-area: appIcons;
+		justify-self: start;
+	}
+
+	footer section[aria-label="Apps en keurmerken"] > h2:nth-of-type(2) {
+		grid-area: trustTitle;
+
+		justify-self: end;
+		text-align: end;
+
+		font-weight: 500;
+		opacity: 0.75;
+	}
+
+	footer section[aria-label="Apps en keurmerken"] > a[aria-label="Bekijk Thuiswinkel Waarborg"] {
+		grid-area: trustLogo;
+		justify-self: start;
+	}
+
+	footer section[aria-label="Apps en keurmerken"] img {
+		inline-size: 10rem;
+	}
+
+	footer section[aria-label="Taal en social"] {
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	footer section[aria-label="Taal en social"] button {
+		grid-column: 1;
+		justify-self: start;
+	}
+
+	footer section[aria-label="Taal en social"] p {
+		display: none;
+	}
+
+	footer section[aria-label="Taal en social"] ul {
+		grid-column: 2;
+		justify-self: center;
+	}
+
+	footer section[aria-label="Taal en social"] a[aria-label^="Terug naar"] {
+		grid-column: 3;
+		justify-self: end;
+		overflow-wrap: normal;
+	}
+
+	footer section[aria-label="Juridische informatie"] {
+		padding-block: 2.25rem 1.25rem;
+	}
+}
+
+/****************************/
+/* Coffee bean loading layer */
+/****************************/
+[data-bean-rain] {
+	position: fixed;
+	inset-inline: 0;
+	top: -120%;
+
+	inline-size: 100%;
+
+	pointer-events: none;
+	z-index: 999;
+
+	opacity: 0;
+	transform: translateY(0);
+}
+
+html.is-bean-rain [data-bean-rain] {
+	animation: bean-sheet-fall 1600ms ease-out both;
+}
+
+@keyframes bean-sheet-fall {
+	0% {
+		opacity: 0;
+		transform: translateY(0);
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY(220vh);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html.is-bean-rain [data-bean-rain] {
+		animation: none;
+		opacity: 0;
+	}
+}
+
+  

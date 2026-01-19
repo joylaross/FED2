@@ -1,0 +1,1841 @@
+/**************/
+/* CSS REMEDY */
+/**************/
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "NespressoLucas";
+	src: url("../fonts/NespressoLucas-Medium.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*********************/
+/* CUSTOM PROPERTIES */
+/*********************/
+:root {
+	--color-text: #111;
+	--color-background: #eee;
+	--color-white: #fff;
+	--color-black: #000;
+
+	--color-surface: #fff;
+	--color-section-hero: #a89273;
+	--color-section-3: #ead0ac;
+	--color-section-6: #e9dcc3;
+	--color-section-tint: #f3eee8;
+
+	--color-accent: #8c6b3f;
+	--color-accent-hero-button: #8c7a5d;
+	--color-link-conditions: #5b381e;
+
+	--border-color-soft: rgba(0, 0, 0, 0.08);
+	--border-color-soft-2: rgba(0, 0, 0, 0.12);
+	--border-color-medium: rgba(0, 0, 0, 0.18);
+	--border-color-strong: rgba(0, 0, 0, 0.25);
+
+	--shadow-header: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.08);
+
+	--overlay-scrim: rgba(0, 0, 0, 0.35);
+
+	--gradient-surface-solid: rgba(255, 255, 255, 1);
+	--gradient-surface-fade: rgba(255, 255, 255, 0);
+
+	--radius-xs: 0.3em;
+	--radius-pill: 999rem;
+
+	--duration-fast: 200ms;
+	--easing-standard: ease;
+
+	--font-main: "NespressoLucas", sans-serif;
+	--font-size-h1: 2rem;
+	--font-size-h2: 2rem;
+	--font-size-h3: 1rem;
+	--font-size-p: 1rem;
+	--font-size-small: 0.85rem;
+
+	--base-font-size: 100%;
+}
+
+html {
+	font-size: var(--base-font-size);
+}
+
+:root[data-font="sm"] {
+	--base-font-size: 90%;
+}
+
+:root[data-font="md"] {
+	--base-font-size: 100%;
+}
+
+:root[data-font="lg"] {
+	--base-font-size: 115%;
+}
+
+:root[data-theme="dark"] {
+	--color-text: #eee;
+	--color-background: #111;
+
+	--color-surface: #161616;
+
+	--color-section-hero: #6f5f4a;
+	--color-section-3: #5a4a3a;
+	--color-section-6: #3a332b;
+	--color-section-tint: #1a1a1a;
+
+	--border-color-soft: rgba(255, 255, 255, 0.12);
+	--border-color-soft-2: rgba(255, 255, 255, 0.16);
+	--border-color-medium: rgba(255, 255, 255, 0.22);
+	--border-color-strong: rgba(255, 255, 255, 0.32);
+
+	--shadow-header: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.45);
+	--overlay-scrim: rgba(0, 0, 0, 0.55);
+
+	--gradient-surface-solid: rgba(22, 22, 22, 1);
+	--gradient-surface-fade: rgba(22, 22, 22, 0);
+
+	--color-accent: #b99663;
+	--color-accent-hero-button: #8c7a5d;
+	--color-link-conditions: #d5b48e;
+}
+
+/****************/
+/* BASE STYLING */
+/****************/
+body {
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+
+	font-family: var(--font-main);
+
+	background: var(--color-surface);
+	color: var(--color-text);
+}
+
+/***********/
+/* Header  */
+/***********/
+header {
+	top: 0;
+	z-index: 10;
+
+	background: var(--color-surface);
+	box-shadow: var(--shadow-header);
+
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	gap: 1rem;
+
+	padding: 1rem 1.25rem;
+}
+
+header > a[aria-label="Nespresso home"] {
+	justify-self: start;
+
+	display: inline-flex;
+	align-items: center;
+
+	text-decoration: none;
+	color: var(--color-text);
+}
+
+header > a[aria-label="Nespresso home"] img {
+	inline-size: clamp(7.5rem, 18vw, 10.5rem);
+	block-size: auto;
+	display: block;
+}
+
+header > button[aria-label="Menu openen"] {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--color-text);
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.25rem;
+}
+
+header > button[aria-label="Menu openen"] svg {
+	inline-size: 2rem;
+	block-size: 2rem;
+}
+
+header > button[aria-label="Menu openen"] svg:nth-of-type(2) {
+	display: none;
+}
+
+header > button[aria-label="Menu openen"]::after {
+	content: "Menu";
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+/********************/
+/* Snelkoppelingen  */
+/********************/
+nav[aria-label="Snelkoppelingen"] ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-end;
+}
+
+nav[aria-label="Snelkoppelingen"] a {
+	display: inline-flex;
+	align-items: center;
+
+	color: var(--color-text);
+	text-decoration: none;
+}
+
+nav[aria-label="Snelkoppelingen"] svg {
+	inline-size: 2rem;
+	block-size: 2rem;
+}
+
+nav[aria-label="Snelkoppelingen"] button[data-theme-toggle],
+nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] {
+	display: none;
+}
+
+nav[aria-label="Snelkoppelingen"] a[data-cart-link] {
+	position: relative;
+}
+
+nav[aria-label="Snelkoppelingen"] span[data-cart-count] {
+	position: absolute;
+	inset-block-start: -0.35rem;
+	inset-inline-end: -0.35rem;
+
+	min-inline-size: 1.25rem;
+	block-size: 1.25rem;
+	padding-inline: 0.25rem;
+
+	display: grid;
+	place-items: center;
+
+	border-radius: var(--radius-pill);
+	background: var(--color-accent);
+	color: var(--color-white);
+
+	font-size: 0.75rem;
+	font-weight: 700;
+	line-height: 1;
+
+	transform: scale(0);
+	transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+html[data-cart-state="has-items"] span[data-cart-count] {
+	transform: scale(1);
+}
+
+/***********************/
+/* Mobile menu overlay */
+/***********************/
+nav[aria-label="Hoofdmenu"] {
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	pointer-events: none;
+}
+
+nav[aria-label="Hoofdmenu"]::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+
+	background: var(--overlay-scrim);
+	opacity: 0;
+
+	transition: opacity var(--duration-fast) var(--easing-standard);
+}
+
+nav[aria-label="Hoofdmenu"] > ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	background: var(--color-surface);
+	inline-size: min(86vw, 28rem);
+	block-size: 100svh;
+
+	transform: translateX(-100%);
+	transition: transform var(--duration-fast) var(--easing-standard);
+
+	padding-block-start: 5rem;
+
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+body[data-menu="open"] nav[aria-label="Hoofdmenu"] {
+	pointer-events: auto;
+}
+
+body[data-menu="open"] nav[aria-label="Hoofdmenu"]::before {
+	opacity: 1;
+}
+
+body[data-menu="open"] nav[aria-label="Hoofdmenu"] > ul {
+	transform: translateX(0);
+}
+
+body[data-menu="open"] header > button[aria-label="Menu openen"]::after {
+	content: "Sluit";
+}
+
+body[data-menu="open"] header > button[aria-label="Menu openen"] svg:nth-of-type(1) {
+	display: none;
+}
+
+body[data-menu="open"] header > button[aria-label="Menu openen"] svg:nth-of-type(2) {
+	display: inline-block;
+}
+
+body[data-menu="open"] header > button[aria-label="Menu openen"] {
+	position: fixed;
+	top: 0.9rem;
+	left: 1.25rem;
+	z-index: 40;
+}
+
+nav[aria-label="Hoofdmenu"] li {
+	border-bottom: 0.1rem solid var(--border-color-soft);
+}
+
+nav[aria-label="Hoofdmenu"] a {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	column-gap: 1.25rem;
+
+	padding: 1.2rem 1.5rem;
+
+	text-decoration: none;
+	color: var(--color-text);
+
+	font-weight: 600;
+	font-size: 1.3rem;
+}
+
+nav[aria-label="Hoofdmenu"] a svg {
+	inline-size: 2.05rem;
+	block-size: 2.05rem;
+}
+
+nav[aria-label="Hoofdmenu"] a::after {
+	content: "›";
+	opacity: 0.7;
+}
+
+body[data-scroll="locked"] {
+	overflow: hidden;
+}
+
+@media (min-width: 64em) {
+	header {
+		box-shadow: none;
+
+		padding-inline: 0;
+		padding-block-start: 1.25rem;
+		padding-block-end: 0;
+
+		gap: 1.25rem;
+	}
+
+	header > button[aria-label="Menu openen"] {
+		display: none;
+	}
+
+	header > a[aria-label="Nespresso home"],
+	header > nav[aria-label="Snelkoppelingen"] {
+		padding-inline: 3rem;
+	}
+
+	header > a[aria-label="Nespresso home"] {
+		justify-self: start;
+	}
+
+	header > a[aria-label="Nespresso home"] img {
+		inline-size: 11.5rem;
+	}
+
+	nav[aria-label="Snelkoppelingen"] button[data-theme-toggle],
+	nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] {
+		display: inline-flex;
+	}
+
+	nav[aria-label="Snelkoppelingen"] button[data-theme-toggle] {
+		align-items: center;
+		justify-content: center;
+
+		background: transparent;
+		border: 0.1rem solid var(--border-color-strong);
+		border-radius: var(--radius-pill);
+		padding: 0.35rem 0.55rem;
+
+		color: var(--color-text);
+		cursor: pointer;
+	}
+
+	nav[aria-label="Snelkoppelingen"] button[data-theme-toggle]:focus-visible {
+		outline: 0.15rem solid var(--color-accent);
+		outline-offset: 0.15rem;
+	}
+
+	nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] {
+		margin: 0;
+		padding: 0.2rem;
+
+		border: 0.1rem solid var(--border-color-strong);
+		border-radius: var(--radius-pill);
+
+		gap: 0.2rem;
+		align-items: center;
+
+		background: transparent;
+	}
+
+	nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] legend {
+		position: absolute;
+
+		inline-size: 0.0625rem;
+		block-size: 0.0625rem;
+
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] button {
+		border: 0;
+		background: transparent;
+		color: var(--color-text);
+		cursor: pointer;
+
+		padding: 0.35rem 0.55rem;
+		border-radius: var(--radius-pill);
+
+		font: inherit;
+		line-height: 1;
+	}
+
+	nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] button[aria-pressed="true"] {
+		background: var(--color-section-tint);
+	}
+
+	nav[aria-label="Snelkoppelingen"] fieldset[data-font-size] button:focus-visible {
+		outline: 0.15rem solid var(--color-accent);
+		outline-offset: 0.15rem;
+	}
+
+	nav[aria-label="Snelkoppelingen"] a {
+		border: 0.1rem solid var(--border-color-strong);
+		border-radius: var(--radius-pill);
+
+		padding: 0.6rem 1rem;
+		gap: 0.6rem;
+
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	nav[aria-label="Snelkoppelingen"] a::after {
+		content: attr(aria-label);
+	}
+
+	nav[aria-label="Snelkoppelingen"] svg {
+		inline-size: 1.4rem;
+		block-size: 1.4rem;
+	}
+
+	nav[aria-label="Hoofdmenu"] {
+		position: relative;
+		pointer-events: auto;
+
+		inline-size: 100vw;
+		margin-inline: calc(50% - 50vw);
+
+		background: var(--color-section-tint);
+		grid-column: 1 / -1;
+	}
+
+	nav[aria-label="Hoofdmenu"]::before {
+		content: none;
+	}
+
+	nav[aria-label="Hoofdmenu"] > ul {
+		background: transparent;
+
+		transform: none;
+		transition: none;
+
+		inline-size: min(90rem, 100%);
+		margin-inline: auto;
+
+		block-size: auto;
+		overflow: visible;
+
+		padding: 0;
+
+		display: grid;
+		grid-template-columns: repeat(9, 1fr);
+
+		padding-block: 0.35rem;
+		align-items: center;
+	}
+
+	nav[aria-label="Hoofdmenu"] > ul > li {
+		border-bottom: none;
+		border-left: 0.1rem solid var(--border-color-medium);
+
+		display: flex;
+		align-items: stretch;
+	}
+
+	nav[aria-label="Hoofdmenu"] > ul > li:first-child {
+		border-left: none;
+	}
+
+	nav[aria-label="Hoofdmenu"] a {
+		inline-size: 100%;
+		block-size: 100%;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		gap: 0.2rem;
+		padding-block: 0.2rem;
+
+		text-align: center;
+		text-wrap: balance;
+
+		font-size: 0.85rem;
+	}
+
+	nav[aria-label="Hoofdmenu"] a::after {
+		content: "";
+	}
+
+	nav[aria-label="Hoofdmenu"] a svg {
+		inline-size: 1.45rem;
+		block-size: 1.45rem;
+	}
+}
+
+/*************************/
+/* Sectie 1              */
+/*************************/
+main > section:first-of-type {
+	background-color: var(--color-section-hero);
+	text-align: center;
+	padding: 4em 1.5em;
+	z-index: 2;
+}
+
+main > section:first-of-type h1 {
+	font-size: 2rem;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	margin-block-end: 1em;
+	color: var(--color-background);
+}
+
+main > section:first-of-type p {
+	max-inline-size: 75ch;
+	margin: 0 auto 2em;
+	line-height: 1.6;
+}
+
+/* Let op: liever selecteren op structuur dan op generieke classnaam */
+main > section:first-of-type > .button-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5em;
+}
+
+main > section:first-of-type > .button-container .or {
+	display: none;
+	color: var(--color-white);
+	font-weight: 600;
+}
+
+main > section:first-of-type button {
+	background-color: var(--color-accent-hero-button);
+	color: var(--color-white);
+
+	border: none;
+	border-radius: var(--radius-xs);
+
+	padding: 0.6em 1.2em;
+
+	font-weight: 600;
+	letter-spacing: 0.05em;
+
+	cursor: pointer;
+
+	inline-size: 100%;
+	max-inline-size: 20em;
+}
+
+@media (min-width: 64em) {
+	main > section:first-of-type {
+		padding: 6em 2em;
+	}
+
+	main > section:first-of-type h1 {
+		font-size: 2.8rem;
+	}
+
+	main > section:first-of-type > .button-container {
+		flex-direction: row;
+		justify-content: center;
+		gap: 1em;
+	}
+
+	main > section:first-of-type button {
+		inline-size: auto;
+		min-inline-size: 12em;
+		padding: 0.8em 1.6em;
+	}
+
+	main > section:first-of-type > .button-container .or {
+		display: inline-block;
+		color: var(--color-black);
+	}
+}
+
+/**********************/
+/* Sectie 2: voordelen */
+/**********************/
+/* Docent-tip: nth-of-type is fragiel. Beter: main > section[data-section="voordelen"] */
+main > section:nth-of-type(2) {
+	background-color: var(--color-surface);
+
+	display: flex;
+	flex-direction: column;
+	gap: 1.5em;
+
+	padding-block-start: 2em;
+	padding-block-end: 0;
+}
+
+main > section:nth-of-type(2) h2 {
+	text-align: center;
+	font-size: 1.25rem;
+
+	max-inline-size: 40ch;
+	margin: 0 auto;
+}
+
+main > section:nth-of-type(2) .carousel-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+
+	inline-size: 100%;
+	padding-inline: 1em;
+
+	overflow: hidden;
+}
+
+main > section:nth-of-type(2) .carousel-wrapper button {
+	background: none;
+	border: none;
+
+	font-size: 2rem;
+	cursor: pointer;
+	flex-shrink: 0;
+
+	color: var(--color-text);
+}
+
+main > section:nth-of-type(2) ul {
+	display: flex;
+	gap: 0.75em;
+
+	list-style: none;
+	padding: 0;
+	margin: 0 auto;
+
+	overflow: hidden;
+
+	inline-size: calc((100% / 3) * 3);
+}
+
+main > section:nth-of-type(2) li {
+	flex: 0 0 calc(100% / 3);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	text-align: center;
+	gap: 0.5em;
+
+	font-size: var(--font-size-small);
+}
+
+main > section:nth-of-type(2) li svg {
+	inline-size: 2.5em;
+	block-size: auto;
+}
+
+main > section:nth-of-type(2) .text-wrapper {
+	order: 3;
+
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+
+	padding-inline: 1rem;
+}
+
+main > section:nth-of-type(2) h3,
+main > section:nth-of-type(2) p {
+	margin: 0;
+	max-inline-size: 35ch;
+}
+
+main > section:nth-of-type(2) > img {
+	order: 4;
+
+	inline-size: 100%;
+	display: block;
+
+	object-fit: cover;
+	object-position: bottom;
+}
+
+@media (min-width: 64em) {
+	main > section:nth-of-type(2) {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3em;
+
+		padding-block-start: 4em;
+		padding-block-end: 0;
+
+		align-items: center;
+	}
+
+	main > section:nth-of-type(2) h2,
+	main > section:nth-of-type(2) .carousel-wrapper {
+		grid-column: 1 / -1;
+	}
+
+	main > section:nth-of-type(2) .carousel-wrapper {
+		padding-inline: 3em;
+	}
+
+	main > section:nth-of-type(2) ul {
+		gap: 0.4em;
+		inline-size: calc((100% / 7) * 7);
+	}
+
+	main > section:nth-of-type(2) li {
+		flex: 0 0 calc(100% / 7);
+	}
+
+	main > section:nth-of-type(2) .text-wrapper {
+		grid-column: 1;
+		align-self: center;
+
+		/* i.p.v. margins op h3/p die “duwen” */
+		padding-inline-start: 3rem;
+	}
+
+	main > section:nth-of-type(2) h3 {
+		font-size: 1.5rem;
+		margin-block-end: 2rem;
+	}
+
+	main > section:nth-of-type(2) p {
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	main > section:nth-of-type(2) > img {
+		grid-column: 2;
+
+		inline-size: 150%;
+		block-size: 100%;
+
+		justify-self: end;
+
+		object-fit: cover;
+		object-position: bottom;
+	}
+}
+
+/*******************************/
+/* Sectie 3: voordeel carousel */
+/*******************************/
+/* Docent-tip: nth-of-type is fragiel. Beter: main > section[data-section="status"] */
+main > section:nth-of-type(3) {
+	background-color: var(--color-section-3);
+	padding: 3em 1em;
+	text-align: center;
+}
+
+main > section:nth-of-type(3) article:nth-of-type(1) {
+	--accent: #b7b0a3;
+}
+
+main > section:nth-of-type(3) article:nth-of-type(2) {
+	--accent: #b14a59;
+}
+
+main > section:nth-of-type(3) article:nth-of-type(3) {
+	--accent: #b38a3a;
+}
+
+main > section:nth-of-type(3) h2 {
+	margin-block-end: 2em;
+}
+
+main > section:nth-of-type(3) article {
+	display: none;
+
+	max-inline-size: 32em;
+	text-align: left;
+
+	background: none;
+	padding: 0;
+
+	margin: 0 0 3em;
+}
+
+main > section:nth-of-type(3) article.active {
+	display: block;
+}
+
+main > section:nth-of-type(3) article header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	margin-block-end: 1em;
+
+	background: none;
+	padding: 0;
+	box-shadow: none;
+}
+
+main > section:nth-of-type(3) header h3 {
+	margin: 0;
+	flex: 1;
+
+	text-align: center;
+
+	font-family: var(--font-script, "Brush Script MT", "Segoe Script", cursive);
+	font-weight: 400;
+	font-size: clamp(2rem, 6vw, 3rem);
+	color: var(--accent);
+}
+
+main > section:nth-of-type(3) header button {
+	background: none;
+	border: none;
+
+	font-size: 2rem;
+	cursor: pointer;
+	color: var(--color-text);
+}
+
+main > section:nth-of-type(3) ul {
+	padding-inline-start: 1.2em;
+	list-style-type: disc;
+}
+
+main > section:nth-of-type(3) li::marker {
+	color: var(--accent);
+}
+
+main > section:nth-of-type(3) li {
+	margin-block-end: 0.4em;
+}
+
+main > section:nth-of-type(3) .voorwaarden-link {
+	display: inline-block;
+
+	color: var(--color-link-conditions);
+	font-weight: 600;
+	font-size: 1rem;
+
+	text-decoration: none;
+	cursor: pointer;
+}
+
+main > section:nth-of-type(3) .voorwaarden-link:hover,
+main > section:nth-of-type(3) .voorwaarden-link:focus-visible {
+	text-decoration: underline;
+}
+
+main > section:nth-of-type(3) > p {
+	max-inline-size: 40ch;
+	margin: 0 auto;
+
+	font-size: 0.9em;
+}
+
+@media (min-width: 64em) {
+	main > section:nth-of-type(3) {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 3em;
+
+		padding: 4em 6vw;
+		text-align: left;
+	}
+
+	main > section:nth-of-type(3) h2 {
+		grid-column: 1 / -1;
+
+		text-align: center;
+		margin-block-end: 3em;
+	}
+
+	main > section:nth-of-type(3) article {
+		display: block;
+		max-inline-size: none;
+		margin: 0;
+	}
+
+	main > section:nth-of-type(3) header button {
+		display: none;
+	}
+
+	main > section:nth-of-type(3) .voorwaarden-link,
+	main > section:nth-of-type(3) > p {
+		grid-column: 1 / -1;
+		text-align: center;
+	}
+
+	main > section:nth-of-type(3) > p {
+		max-inline-size: 50ch;
+		margin: 0 auto;
+	}
+}
+
+/**************************/
+/* Sectie 4: exclusief     */
+/**************************/
+main>section:nth-of-type(4) {
+	position: relative;
+	background-color: var(--color-surface);
+	color: var(--color-text);
+	padding: 0;
+
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+main>section:nth-of-type(4) img {
+	width: 100%;
+	height: 40vh;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	order: -1;
+}
+
+main>section:nth-of-type(4)> :not(img) {
+	padding-inline: 1rem;
+}
+
+main>section:nth-of-type(4) h2,
+main>section:nth-of-type(4) p,
+main>section:nth-of-type(4) button {
+	margin: 0;
+	max-width: 50em;
+}
+
+main>section:nth-of-type(4) h2 {
+	padding-block-start: 1.25rem;
+	font-size: 1.4rem;
+	line-height: 1.2;
+}
+
+main>section:nth-of-type(4) p {
+	line-height: 1.5;
+	margin-top: 0.75rem;
+	margin-bottom: 1rem;
+}
+
+main>section:nth-of-type(4) button {
+	align-self: flex-start;
+	margin-bottom: 2rem;
+
+	padding: 0.8em 1.6em;
+	border: none;
+	border-radius: 2em;
+	background-color: var(--color-accent);
+	color: var(--color-white);
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+main>section:nth-of-type(4)::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40vh;
+	pointer-events: none;
+	background: linear-gradient(to right,
+			var(--color-surface) 0%,
+			var(--gradient-surface-fade) 40%,
+			transparent 75%);
+}
+
+@media (min-width: 48em) {
+	main>section:nth-of-type(4) {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+			"title image"
+			"text  image"
+			"cta   image";
+
+		height: 100vh;
+		min-height: 100vh;
+
+		padding-inline-start: 4rem;
+		padding-inline-end: 0;
+		padding-block-start: 4rem;
+		padding-block-end: 0;
+
+		align-items: start;
+		column-gap: 0;
+
+		position: relative;
+	}
+
+	main>section:nth-of-type(4)> :not(img) {
+		padding-inline: 0;
+	}
+
+	main>section:nth-of-type(4) h2 {
+		grid-area: title;
+		padding-block-start: 0;
+		max-width: 26ch;
+		margin: 0;
+	}
+
+	main>section:nth-of-type(4) p {
+		grid-area: text;
+		max-width: 48ch;
+		margin: 1.25rem 0 0 0;
+	}
+
+	main>section:nth-of-type(4) button {
+		grid-area: cta;
+		margin: 1.5rem 0 0 0;
+		max-width: 18rem;
+	}
+
+	main>section:nth-of-type(4) img {
+		grid-area: image;
+
+		order: 0;
+
+		width: 100%;
+		height: 100%;
+		min-height: 100%;
+
+		justify-self: stretch;
+		align-self: stretch;
+
+		object-fit: cover;
+		object-position: center;
+
+		display: block;
+	}
+
+	main>section:nth-of-type(4)::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+
+		left: 50%;
+		width: 50%;
+		height: auto;
+
+		pointer-events: none;
+
+		background: linear-gradient(to right,
+				var(--color-surface) 0%,
+				var(--gradient-surface-fade) 35%,
+				transparent 70%);
+	}
+
+
+	main>section:nth-of-type(4) {
+		width: 100vw;
+		margin-inline: calc(50% - 50vw);
+	}
+
+}
+
+@media (min-width: 48em) {
+	main>section:nth-of-type(4) {
+		padding: 0;
+
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+			"title image"
+			"text  image"
+			"cta   image";
+
+		grid-template-rows: auto auto auto;
+		row-gap: 0;
+		align-content: start;
+
+		height: clamp(24rem, 60vh, 40rem);
+		min-height: clamp(24rem, 60vh, 40rem);
+
+		align-items: start;
+		column-gap: 0;
+		position: relative;
+
+		width: 100vw;
+		margin-inline: calc(50% - 50vw);
+
+		justify-items: start;
+	}
+
+	main>section:nth-of-type(4) h2 {
+		grid-area: title;
+		margin: 3rem 0 0 4rem;
+		max-width: 26ch;
+	}
+
+	main>section:nth-of-type(4) p {
+		grid-area: text;
+		margin: 0 0 0 4rem;
+		max-width: 48ch;
+	}
+
+	main>section:nth-of-type(4) button {
+		grid-area: cta;
+		margin: 0 0 0 4rem;
+
+		justify-self: start;
+		align-self: start;
+
+		width: max-content;
+		padding: 0.8em 1.6em;
+		max-width: 18rem;
+	}
+
+	main>section:nth-of-type(4) img {
+		grid-area: image;
+
+		order: 0;
+
+		width: 100%;
+		height: 100%;
+		min-height: 100%;
+
+		justify-self: stretch;
+		align-self: stretch;
+
+		object-fit: cover;
+		object-position: center;
+		display: block;
+	}
+
+	main>section:nth-of-type(4)::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+
+		left: 50%;
+		width: 50%;
+		height: auto;
+
+		pointer-events: none;
+
+		background: linear-gradient(to right,
+				var(--color-surface) 0%,
+				var(--gradient-surface-fade) 35%,
+				transparent 70%);
+	}
+}
+
+/****************************/
+/* Sectie 5: functies        */
+/****************************/
+main>section:nth-of-type(5) {
+	background-color: var(--color-black);
+	color: var(--color-white);
+	padding: 4vh 6vw;
+}
+
+main>section:nth-of-type(5) ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 4vh 4vw;
+}
+
+main>section:nth-of-type(5) li {
+	text-align: center;
+	position: relative;
+	padding-top: 3em;
+}
+
+main>section:nth-of-type(5) li .icon {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 2em;
+	height: auto;
+	fill: var(--color-white);
+}
+
+main>section:nth-of-type(5) li p:first-child {
+	font-weight: 600;
+	margin-bottom: 1em;
+}
+
+main>section:nth-of-type(5) li p:last-child {
+	font-size: 0.9em;
+	line-height: 1.4;
+	opacity: 0.85;
+}
+
+@media (min-width: 48em) {
+	main>section:nth-of-type(5) ul {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/**********************/
+/* Sectie 6: ontdek    */
+/**********************/
+main>section:nth-of-type(6) {
+	background-color: var(--color-section-6);
+	padding: 3vh 6vw;
+	text-align: center;
+}
+
+main>section:nth-of-type(6) h3 {
+	margin: 0;
+	font-size: 1em;
+	font-weight: 400;
+	color: var(--color-text);
+
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75em;
+}
+
+main>section:nth-of-type(6) .koffie-icoon {
+	flex-shrink: 0;
+	width: 1.5em;
+	height: auto;
+}
+
+/******************/
+/* Sectie 7: klant */
+/******************/
+main>section:nth-of-type(7) {
+	background-color: var(--color-section-hero);
+	padding: 2em 2.5em;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+
+	color: var(--color-text);
+}
+
+main>section:nth-of-type(7) h1 {
+	font-size: 1.75rem;
+	max-width: 30ch;
+	margin-bottom: 0.4em;
+}
+
+main>section:nth-of-type(7) h2 {
+	font-size: 1rem;
+	font-weight: 400;
+	max-width: 38ch;
+	margin-bottom: 0.8em;
+}
+
+main>section:nth-of-type(7) button {
+	padding: 0.9em 1.8em;
+	border-radius: 2em;
+	border: none;
+	background-color: var(--color-black);
+	color: var(--color-white);
+	font-size: 1rem;
+	cursor: pointer;
+	margin-bottom: 0.6em;
+}
+
+main>section:nth-of-type(7) a {
+	font-size: 0.9rem;
+	text-decoration: underline;
+	cursor: pointer;
+	margin-top: 0;
+	color: inherit;
+}
+
+main>section:nth-of-type(7) img {
+	display: none;
+}
+
+@media (min-width: 48em) {
+	main>section:nth-of-type(7) {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto auto auto auto;
+		column-gap: 3em;
+
+		padding: 0;
+		text-align: left;
+		align-items: start;
+
+		height: clamp(18rem, 42vh, 24rem);
+		overflow: hidden;
+	}
+
+	main>section:nth-of-type(7) h1 {
+		grid-column: 1;
+		grid-row: 1;
+		margin: 1.2em 0 0.35em 1.5em;
+		line-height: 1.15;
+		max-width: 30ch;
+	}
+
+	main>section:nth-of-type(7) h2 {
+		grid-column: 1;
+		grid-row: 2;
+		margin: 0 0 0.8em 2.5em;
+		line-height: 1.35;
+		max-width: 46ch;
+	}
+
+	main>section:nth-of-type(7) button {
+		grid-column: 1;
+		grid-row: 3;
+		margin: 0 0 0.6em 2.5em;
+		width: fit-content;
+		padding: 0.85em 1.4em;
+	}
+
+	main>section:nth-of-type(7) a {
+		grid-column: 1;
+		grid-row: 4;
+
+		margin: 0 0 1.2em 2.5em;
+		width: fit-content;
+	}
+
+	main>section:nth-of-type(7) img {
+		display: block;
+		grid-column: 2;
+		grid-row: 1 / -1;
+
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+
+		justify-self: end;
+		align-self: stretch;
+	}
+}
+
+/****************/
+/* Footer basis */
+/****************/
+footer {
+	background: var(--color-surface);
+	color: var(--color-text);
+	display: flex;
+	flex-direction: column;
+}
+
+footer>section {
+	padding-inline: clamp(1.25rem, 4vw, 6rem);
+}
+
+footer ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+footer a {
+	color: inherit;
+	text-decoration: none;
+}
+
+footer a:hover,
+footer a:focus-visible {
+	text-decoration: underline;
+}
+
+footer h2 {
+	margin: 0 0 0.75rem;
+	font-size: 1.15rem;
+	font-weight: 600;
+}
+
+.visually-hidden {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/************************************/
+/* 1) Footer navigatie (details)     */
+/************************************/
+section[aria-label="Footer navigatie"] {
+	padding-block: clamp(2.25rem, 4vw, 4rem);
+	display: grid;
+	gap: 1.25rem;
+}
+
+section[aria-label="Footer navigatie"] details {
+	border-top: 0.1rem solid var(--border-color-soft-2);
+}
+
+section[aria-label="Footer navigatie"] details:last-of-type {
+	border-bottom: 0.1rem solid var(--border-color-soft-2);
+}
+
+section[aria-label="Footer navigatie"] summary {
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1.1rem;
+	list-style: none;
+
+	min-block-size: 2.75rem;
+	padding-block: 0.65rem;
+
+	position: relative;
+	padding-inline-end: 2rem;
+
+	display: flex;
+	align-items: center;
+}
+
+section[aria-label="Footer navigatie"] summary::-webkit-details-marker {
+	display: none;
+}
+
+section[aria-label="Footer navigatie"] summary::after {
+	content: "▾";
+	position: absolute;
+	inset-inline-end: 0;
+	inset-block-start: 50%;
+	transform: translateY(-50%);
+	font-size: 1.2rem;
+	transition: transform 0.2s ease;
+	opacity: 0.8;
+}
+
+section[aria-label="Footer navigatie"] details[open]>summary::after {
+	transform: translateY(-50%) rotate(180deg);
+}
+
+section[aria-label="Footer navigatie"] nav ul {
+	margin-block: 0.9rem 1.25rem;
+	display: grid;
+	gap: 0.85rem;
+}
+
+section[aria-label="Footer navigatie"] nav a {
+	font-size: 1rem;
+	opacity: 0.85;
+}
+
+section[aria-label="Footer navigatie"] details:last-of-type a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+section[aria-label="Footer navigatie"] details:last-of-type svg {
+	inline-size: 1.25rem;
+	block-size: 1.25rem;
+	opacity: 0.7;
+	flex: 0 0 auto;
+}
+
+/************************************/
+/* 2) Apps en keurmerken             */
+/************************************/
+section[aria-label="Apps en keurmerken"] {
+	padding-block: clamp(2rem, 4vw, 3.25rem);
+	display: grid;
+	gap: 1.75rem;
+
+	justify-items: start;
+	text-align: start;
+}
+
+section[aria-label="Apps en keurmerken"] h2 {
+	margin: 0;
+	font-size: 1.05rem;
+	font-weight: 600;
+}
+
+section[aria-label="Apps en keurmerken"] ul {
+	display: inline-flex;
+	gap: 1.25rem;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+section[aria-label="Apps en keurmerken"] ul a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: 2.5rem;
+	block-size: 2.5rem;
+}
+
+section[aria-label="Apps en keurmerken"] ul svg {
+	inline-size: 1.6rem;
+	block-size: 1.6rem;
+	opacity: 0.9;
+}
+
+section[aria-label="Apps en keurmerken"] a[aria-label="Bekijk Thuiswinkel Waarborg"] {
+	justify-self: start;
+}
+
+section[aria-label="Apps en keurmerken"] img {
+	display: block;
+	inline-size: min(12rem, 70vw);
+	block-size: auto;
+}
+
+/************************************/
+/* 3) Taal en social (beige balk)    */
+/************************************/
+section[aria-label="Taal en social"] {
+	background: var(--color-section-tint);
+	border-top: 0.1rem solid var(--border-color-soft);
+	padding-block: 1.1rem;
+
+	display: grid;
+	gap: 0.9rem;
+	align-items: center;
+}
+
+section[aria-label="Taal en social"] h2 {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	clip-path: inset(50%);
+}
+
+section[aria-label="Taal en social"] button {
+	justify-self: start;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	font-size: 1rem;
+	opacity: 0.9;
+	color: inherit;
+	padding: 0;
+}
+
+section[aria-label="Taal en social"] p {
+	margin: 0;
+	font-weight: 600;
+	opacity: 0.9;
+}
+
+section[aria-label="Taal en social"] ul {
+	display: inline-flex;
+	gap: 1.1rem;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+section[aria-label="Taal en social"] ul a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	inline-size: 2.25rem;
+	block-size: 2.25rem;
+	border-radius: 999rem;
+}
+
+section[aria-label="Taal en social"] ul svg {
+	inline-size: 1.35rem;
+	block-size: 1.35rem;
+	opacity: 0.9;
+}
+
+section[aria-label="Taal en social"] a[aria-label^="Terug naar"] {
+	justify-self: start;
+	opacity: 0.9;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+section[aria-label="Taal en social"] a[aria-label^="Terug naar"]::after {
+	content: "↑";
+	opacity: 0.85;
+}
+
+/************************************/
+/* 4) Juridische informatie          */
+/************************************/
+section[aria-label="Juridische informatie"] {
+	padding-block: 2.25rem 1.5rem;
+	display: grid;
+	gap: 0.9rem;
+}
+
+section[aria-label="Juridische informatie"] nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.75rem;
+	font-size: 0.95rem;
+}
+
+section[aria-label="Juridische informatie"] nav li {
+	display: inline-flex;
+	align-items: center;
+}
+
+section[aria-label="Juridische informatie"] nav li+li::before {
+	content: "|";
+	opacity: 0.4;
+	margin-inline: 0.5rem;
+}
+
+section[aria-label="Juridische informatie"] p {
+	margin: 0;
+	opacity: 0.75;
+	font-size: 0.95rem;
+	text-align: center;
+}
+
+@media (min-width: 64em) {
+
+	/*********************/
+	/* 1) Linkkolommen    */
+	/*********************/
+	section[aria-label="Footer navigatie"] {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: clamp(2rem, 4vw, 5rem);
+		padding-block: 3.25rem;
+		align-items: start;
+	}
+
+	section[aria-label="Footer navigatie"] details {
+		border: none;
+		display: grid;
+		align-content: start;
+		gap: 1.1rem;
+	}
+
+	section[aria-label="Footer navigatie"] summary {
+		font-size: 1.35rem;
+		font-weight: 500;
+		margin: 0;
+		text-align: center;
+
+		cursor: default;
+		pointer-events: none;
+		padding: 0;
+		min-block-size: auto;
+	}
+
+	section[aria-label="Footer navigatie"] summary::after {
+		content: "";
+	}
+
+	section[aria-label="Footer navigatie"] nav {
+		justify-self: stretch;
+	}
+
+	section[aria-label="Footer navigatie"] nav ul {
+		margin: 0;
+		display: grid;
+		gap: 0.9rem;
+		justify-items: start;
+		text-align: start;
+		inline-size: auto;
+	}
+
+	section[aria-label="Footer navigatie"] nav a {
+		font-size: 1.05rem;
+	}
+
+
+	/*************************/
+	/* 2) Apps en keurmerken  */
+	/*************************/
+	section[aria-label="Apps en keurmerken"] {
+		justify-content: center;
+		justify-items: stretch;
+		align-items: center;
+
+		grid-template-columns: max-content max-content;
+		grid-template-areas:
+			"appTitle appIcons"
+			"trustTitle trustLogo";
+
+		column-gap: 2.5rem;
+		row-gap: 2.25rem;
+	}
+
+	section[aria-label="Apps en keurmerken"]>h2:first-of-type {
+		grid-area: appTitle;
+		justify-self: end;
+		text-align: end;
+		font-weight: 500;
+		opacity: 0.75;
+	}
+
+	section[aria-label="Apps en keurmerken"]>ul {
+		grid-area: appIcons;
+		justify-self: start;
+	}
+
+	section[aria-label="Apps en keurmerken"]>h2:nth-of-type(2) {
+		grid-area: trustTitle;
+		justify-self: end;
+		text-align: end;
+		font-weight: 500;
+		opacity: 0.75;
+	}
+
+	section[aria-label="Apps en keurmerken"]>a[aria-label="Bekijk Thuiswinkel Waarborg"] {
+		grid-area: trustLogo;
+		justify-self: start;
+	}
+
+	section[aria-label="Apps en keurmerken"] img {
+		inline-size: 10rem;
+	}
+
+
+	/*******************************/
+	/* 3) Taal en social (beige)   */
+	/*******************************/
+	@media (min-width: 64em) {
+		section[aria-label="Taal en social"] {
+			grid-template-columns: 1fr auto 1fr;
+			grid-template-areas: "language socials backtop";
+			gap: 0.75rem 2rem;
+		}
+
+		section[aria-label="Taal en social"] button {
+			grid-area: language;
+			justify-self: start;
+		}
+
+		section[aria-label="Taal en social"] p {
+			display: none;
+		}
+
+		section[aria-label="Taal en social"] ul {
+			grid-area: socials;
+			justify-self: center;
+		}
+
+		section[aria-label="Taal en social"] a[aria-label^="Terug naar"] {
+			grid-area: backtop;
+			justify-self: center;
+		}
+	}
+
+	/*******************************/
+	/* 4) Juridische informatie     */
+	/*******************************/
+	section[aria-label="Juridische informatie"] {
+		padding-block: 2.25rem 1.25rem;
+	}
+}
+
+/****************************/
+/* Coffee bean loading layer */
+/****************************/
+[data-bean-rain] {
+	position: fixed;
+	inset-inline: 0;
+	top: -120%;
+	inline-size: 100%;
+	pointer-events: none;
+	z-index: 999;
+
+	opacity: 0;
+	transform: translateY(0);
+}
+
+html.is-bean-rain [data-bean-rain] {
+	animation: bean-sheet-fall 1600ms ease-out both;
+}
+
+@keyframes bean-sheet-fall {
+	0% {
+		opacity: 0;
+		transform: translateY(0);
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY(220vh);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html.is-bean-rain [data-bean-rain] {
+		animation: none;
+		opacity: 0;
+	}
+}
